@@ -5,9 +5,11 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
   plugins: [
     react(),
+    
      tsconfigPaths(), // Đọc alias từ tsconfig.json
     
   ],
+  base: '/', // hoặc bỏ dòng này cũng được
   server: {
     proxy: {
       '/api': {
