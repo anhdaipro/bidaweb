@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@component/*": ["src/component/*"],
+      "@form/*": ["src/form/*"],
+      "@typesModel/*": ["src/types/model/*"],
+      "@type/*": ["src/types/*"],
+    }
+  },
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
