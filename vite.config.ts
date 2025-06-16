@@ -11,7 +11,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000', // cổng backend
+        target: 'https://bidanode.onrender.com', // cổng backend
         changeOrigin: true,
         secure: false,
       },

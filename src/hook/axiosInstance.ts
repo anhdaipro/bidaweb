@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-export const baseURL = 'http://localhost:5000/api'
+export const baseURL = 'https://bidanode.onrender.com/api'
 const axiosInstance = axios.create({
   baseURL, // Đặt base URL của API
 });
