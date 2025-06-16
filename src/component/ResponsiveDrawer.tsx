@@ -22,7 +22,7 @@ const menus = [
   { title: 'Phiên chơi', url: '/session', icon: <ReceiptIcon /> },
   { title: 'Nhân viên', url: '/employee', icon: <PeopleIcon /> },
   { title: 'Lịch làm việc', url: '/schedule', icon: <CalendarMonthIcon /> },
-  { title: 'Thống kê', url: '/dashboard', icon: <BarChartIcon /> },
+  { title: 'Thống kê', url: '/', icon: <BarChartIcon /> },
   { title: 'Giao dịch', url: '/transaction', icon: <DashboardIcon /> },
   { title: 'Chấm công', url: '/timesheet', icon: <PunchClockIcon /> },
   { title: 'Khách hàng', url: '/customer', icon: <GroupIcon /> },
