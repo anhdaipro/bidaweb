@@ -45,8 +45,8 @@ const Form: React.FC<Props> = ({ table }) => {
     values: { ...table },
   });
 
-  const { mutate: addBilliardTable } = useCreateBilliardTable();
-  const { mutate: updateBilliardTable } = useUpdateBilliardTable();
+  const { mutate: addBilliardTable,isPending:isPendingCreate } = useCreateBilliardTable();
+  const { mutate: updateBilliardTable,isPending:isPendingUpdate } = useUpdateBilliardTable();
 
   const handleFormSubmit = (data: BilliardTableForm) => {
     const payload = { ...data };
@@ -218,6 +218,7 @@ const Form: React.FC<Props> = ({ table }) => {
         />
 
         <Button
+        disabled={isPendingCreate || isPendingUpdate}
           variant="contained"
           color="success"
           type="submit"

@@ -25,7 +25,7 @@ const RewardTab: React.FC<RewardTabProps> = ({ tableSessions, selectedSession })
   const [isNew, setIsNew] = useState(false);
   const addToast = useToastStore((state) => state.addToast);
   const [pointsToUse, setPointsToUse] = useState(0);
-  const { mutate: rewardPoint } = useRewardTableSession();
+  const { mutate: rewardPoint,isPending } = useRewardTableSession();
   const { setTableSession } = useTableStore(
     useShallow((state) => ({
       setTableSession: state.setTableSession,
@@ -142,7 +142,7 @@ const RewardTab: React.FC<RewardTabProps> = ({ tableSessions, selectedSession })
               variant="contained"
               color="success"
               onClick={handleApplyPoints}
-              disabled={customer.point < 10 || pointsToUse <= 0}
+              disabled={customer.point < 10 || pointsToUse <= 0 || isPending}
               sx={{ whiteSpace: 'nowrap' }}
             >
               Áp dụng điểm giảm giá

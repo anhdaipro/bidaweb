@@ -126,8 +126,9 @@ const Form: React.FC<Props> = ({ employee }) => {
   };
   console.log(errors.cccdFront);
   const {avatar, cccdBack, cccdFront, dateOfBirth,dateBeginJob,dateLeave,bankFullname,bankId,typeEducation,shiftId,baseSalary,status,roleId } = watch();
-  const { mutate: addEmployee } = useCreateEmployee();
-  const { mutate: updateEmployee } = useUpdateEmployee();
+  const { mutate: addEmployee,isPending: isPendingCreate
+ } = useCreateEmployee();
+  const { mutate: updateEmployee,isPending: isPendingUpdate } = useUpdateEmployee();
   const handleRequest = (payload: EmployeeFormSubmit) => {
     if (employee.id) {
       const id = employee.id;
@@ -757,7 +758,7 @@ const Form: React.FC<Props> = ({ employee }) => {
             
           {/* Nút Submit */}
           <Grid size={{xs:12}}>
-            <Button type="submit" fullWidth variant="contained">
+            <Button disabled={isPendingCreate || isPendingUpdate} type="submit" fullWidth variant="contained">
               {title}
             </Button>
           </Grid>

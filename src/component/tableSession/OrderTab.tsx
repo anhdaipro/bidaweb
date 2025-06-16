@@ -59,8 +59,7 @@ const OrderTab: React.FC<OrderTabProps> = ({ selectedSession, tableSessions, sel
   
   const { data: menu, isLoading } = useProductsSearch();
   const [productSearch, setProductSearch] = useState('');
-  const [isPending, startTransition] = useTransition();
-  const { mutate: orderProduct } = useOrderTableSession();
+  const { mutate: orderProduct,isPending } = useOrderTableSession();
   const addToast = useToastStore(state => state.addToast);
   const setTableSession = useTableStore(state => state.setTableSession);
   const [item,setItem] = useState<Product|null>(null);
@@ -389,6 +388,7 @@ const OrderTab: React.FC<OrderTabProps> = ({ selectedSession, tableSessions, sel
       <Button
         variant="contained"
         color="primary"
+        disabled={isPending}
         onClick={handleSubmit(handleOrder)}
         sx={{ alignSelf: 'flex-end', mt: 2 }}
         size={isSmallScreen ? 'small' : 'medium'}

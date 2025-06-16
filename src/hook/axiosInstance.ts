@@ -28,7 +28,7 @@ axiosInstance.interceptors.request.use(
       // Nếu refreshToken còn hạn thì cố gắng refresh
       if (refreshToken && !isTokenExpired(refreshToken)) {
         try {
-          const response = await axios.post('/api/refresh', { refreshToken });
+          const response = await axios.post(`${baseURL}/refresh`, { refreshToken });
           const { accessToken } = response.data;
 
           localStorage.setItem('token', accessToken);

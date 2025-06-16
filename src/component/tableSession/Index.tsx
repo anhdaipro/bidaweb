@@ -109,6 +109,7 @@ const Index: React.FC = () => {
                 gap: 2,
               }}
             >
+              <CircularProgress color="primary" />
               <Typography variant="h6" color="primary">
                 Đang tải dữ liệu...
               </Typography>

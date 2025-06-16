@@ -75,8 +75,8 @@ const FormProductTransaction: React.FC<Props> = ({ transaction }) => {
   });
   const [product, setProduct] = React.useState<Product | null>(null);
 
-  const { mutate: addTransaction } = useCreateTransaction();
-  const { mutate: updateTransaction } = useUpdateTransaction();
+  const { mutate: addTransaction,isPending:isPendingCreate } = useCreateTransaction();
+  const { mutate: updateTransaction,isPending: isPendingUpdate } = useUpdateTransaction();
   const addToast = useToastStore(state => state.addToast);
   const [ignoreInputChange, setIgnoreInputChange] = useState(false);
   const [searchInput, setSearchInput] = useState('');
@@ -171,12 +171,7 @@ const FormProductTransaction: React.FC<Props> = ({ transaction }) => {
   const title = transaction.id ? 'Cập nhật' : 'Tạo mới';
 
   if (isLoading) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
-        <CircularProgress />
-        <Typography variant="body1" ml={2}>Đang tải dữ liệu...</Typography>
-      </Box>
-    );
+    return null;
   }
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
@@ -537,7 +532,9 @@ const FormProductTransaction: React.FC<Props> = ({ transaction }) => {
 
           <Grid size={{xs:12}}>
             <Button 
+            disabled={isPendingCreate||isPendingUpdate}
               variant="contained" 
+              style={{cursor:isPendingCreate||isPendingUpdate ? 'not-allowed': 'pointer'}}
               size="large" 
               fullWidth
               onClick={handleSubmit(sendData)}

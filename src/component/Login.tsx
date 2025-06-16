@@ -13,6 +13,8 @@ import {
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
+import { useToastStore } from '@store/toastStore';
+import { generateId } from '@utils/format';
 const LoginPage: React.FC = () => {
   const user = useAuthStore(state=>state.user);
   const [identifier, setIdentifier] = useState('');
@@ -25,6 +27,7 @@ const LoginPage: React.FC = () => {
   }, [user])
   const {mutate: login, isPending} = useLogin()
   const setUser = useAuthStore(state=>state.setUser)
+  const addToast = useToastStore(state=>state.addToast)
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const data = {identifier,password};
@@ -34,6 +37,13 @@ const LoginPage: React.FC = () => {
             localStorage.setItem('refreshToken', data.refreshToken); // Lưu token vào localStorage
             navigate('/'); // Chuyển hướng đến trang Home
             setUser(data.user)
+        },
+         onError: (error: any) => {
+          addToast({
+            id: generateId(),
+            message: error.response.data.message,
+            type: 'error',
+          });
         },
     });
   };

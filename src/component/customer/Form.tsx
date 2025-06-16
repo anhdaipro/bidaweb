@@ -45,8 +45,8 @@ const Form: React.FC<Props> = ({ customer }) => {
      ...customer
     },
   });
-  const { mutate: addCustomer } = useCreateCustomer();
-  const { mutate: updateCustomer } = useUpdateCustomer();
+  const { mutate: addCustomer,isPending:isPendingCreate } = useCreateCustomer();
+  const { mutate: updateCustomer,isPending:isPendingUpdate } = useUpdateCustomer();
   const handleFormSubmit = (data: CustomerForm) => {
     const payload = {
       ...data
@@ -161,7 +161,7 @@ const Form: React.FC<Props> = ({ customer }) => {
 
           {/* Nút Submit */}
           <Grid size={{xs:12}}>
-            <Button type="submit" fullWidth variant="contained">
+            <Button disabled={isPendingCreate || isPendingUpdate} type="submit" fullWidth variant="contained">
               {title}
             </Button>
           </Grid>

@@ -51,8 +51,8 @@ const headers = ['STT', 'Tên sản phẩm', 'Giá', 'Số lượng', 'Tiền', 
 const FormTableSession: React.FC<Props> = ({ tableSession }) => {
   const { data: products, isLoading } = useProductsSearch();
   const { data: tables, isLoading: isLoadingTable } = useBilliardTables();
-  const { mutate: addTransaction } = useCreateTableSession();
-  const { mutate: updateTransaction } = useUpdateTableSession();
+  const { mutate: addTransaction,isPending: isPendingCreate } = useCreateTableSession();
+  const { mutate: updateTransaction,isPending: isPendingUpdate } = useUpdateTableSession();
   const setLoading = useControlStore((state) => state.setLoading);
   const [ignoreInputChange, setIgnoreInputChange] = useState(false);
   const addToast = useToastStore((state) => state.addToast);
@@ -586,7 +586,7 @@ const FormTableSession: React.FC<Props> = ({ tableSession }) => {
           </TableContainer>}
 
           {/* Submit Button */}
-          <Button variant="contained" color="primary" type="submit" sx={{ mt: 2, alignSelf: 'flex-end' }}>
+          <Button disabled={isPendingCreate || isPendingUpdate} variant="contained" color="primary" type="submit" sx={{ mt: 2, alignSelf: 'flex-end' }}>
             {title}
           </Button>
         </Box>

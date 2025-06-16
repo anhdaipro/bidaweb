@@ -28,8 +28,8 @@ const InfoTab:React.FC<InfoTab> = ({selectedSession, tableSessions,selectedTable
   const setTableSession = useTableStore(state=>state.setTableSession)
   const setTable = useTableStore(state=>state.selectTable)
   const setTables = useTableStore(state=>state.setTables)
-  const {mutate: createTableSession} = useStartTableSession()
-  const {mutate:finishTableSession} = useFinishTableSession();
+  const {mutate: createTableSession,isPending:isPendingCreate} = useStartTableSession()
+  const {mutate:finishTableSession,isPending:isPendingUpdate} = useFinishTableSession();
   const totalAmount = 0;
   if(!selectedTable){
     return <div></div>
@@ -153,24 +153,20 @@ const InfoTab:React.FC<InfoTab> = ({selectedSession, tableSessions,selectedTable
         <>
           <Button
             variant="contained"
+            disabled={isPendingUpdate}
             color="error"
             onClick={finishSession}
             sx={{ flexGrow: 1, borderRadius: 2, fontWeight: 'bold' }}
           >
             Kết thúc phiên
           </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ flexGrow: 1, borderRadius: 2, fontWeight: 'bold' }}
-          >
-            Chuyển bàn
-          </Button>
+         
         </>
       ) : selectedTable.status === STATUS_WAIT_PAID ? (
         <></>
       ) : (
         <Button
+        disabled={isPendingCreate}
           variant="contained"
           color="primary"
           onClick={handleTableSession}
