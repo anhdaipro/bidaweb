@@ -19,8 +19,7 @@ interface InfoTab{
 }
 const InfoTab:React.FC<InfoTab> = ({selectedSession, tableSessions,selectedTable}) => {
   const tables = useTableStore(state=>state.tables)
-  const now = dayjs().utc().tz("Asia/Ho_Chi_Minh");
-  console.log(now.format())
+  const now = dayjs().tz("Asia/Ho_Chi_Minh");
   const start = selectedSession ? dayjs(selectedSession.startTime) : now;
   const diffMs = now.valueOf() - start.valueOf();
   const playedMinutes = Math.floor(diffMs / 60000); // = số phút thực tế đã chơi
