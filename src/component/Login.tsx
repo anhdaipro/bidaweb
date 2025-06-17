@@ -10,14 +10,18 @@ import {
   Typography,
   Button,
   InputAdornment,
+  IconButton,
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
 import { useToastStore } from '@store/toastStore';
 import { generateId } from '@utils/format';
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 const LoginPage: React.FC = () => {
   const user = useAuthStore(state=>state.user);
   const [identifier, setIdentifier] = useState('');
+   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState('');
   const navigate = useNavigate()
   useEffect(()=>{
@@ -88,12 +92,13 @@ const LoginPage: React.FC = () => {
                   <PersonIcon />
                 </InputAdornment>
               ),
+              
             }}
           />
 
           <TextField
             label="Mật khẩu"
-            type="password"
+            type={showPassword ? "text" : "password"}
             variant="outlined"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -104,6 +109,16 @@ const LoginPage: React.FC = () => {
                   <LockIcon />
                 </InputAdornment>
               ),
+              endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={() => setShowPassword(!showPassword)}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+          ),
             }}
           />
 

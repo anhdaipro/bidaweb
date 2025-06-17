@@ -15,6 +15,7 @@ import {
 import { useControlStore } from '../store/useStore';
 import { useAuthStore } from '../store/useUserStore';
 import { useNavigate } from 'react-router-dom';
+import { apiLogout } from '@api/apiUser';
 
 const Header: React.FC = () => {
   const isLoading = useControlStore((state) => state.isLoading);
@@ -24,7 +25,8 @@ const Header: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await apiLogout()
     logout();
     navigate('/login');
   };
