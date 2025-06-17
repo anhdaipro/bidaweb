@@ -97,7 +97,9 @@ const RewardTab: React.FC<RewardTabProps> = ({ tableSessions, selectedSession })
             fullWidth
             size="small"
           />
-          <Button variant="contained" onClick={handleFind} sx={{ minWidth: 120 }}>
+          <Button 
+          disabled={isPending}
+          variant="contained" onClick={handleFind} sx={{ minWidth: 120 }}>
             Tích điểm
           </Button>
         </Stack>

@@ -43,8 +43,8 @@ const FormShift: React.FC<Props> = ({ shift }) => {
         },
     });
     const {name, status, startTime, endTime,salaryHour} = watch();
-    const { mutate: addCustomer } = useCreateShift();
-    const { mutate: updateCustomer } = useUpdateShift();
+    const { mutate: addCustomer,isPending:isPendingCreate } = useCreateShift();
+    const { mutate: updateCustomer, isPending:isPendingUpdate } = useUpdateShift();
     const handleFormSubmit = (data: ShiftForm) => {
         const payload = {
         ...data
@@ -247,7 +247,9 @@ const FormShift: React.FC<Props> = ({ shift }) => {
             </Grid>
             {/* Nút Submit */}
             <Grid size={{xs:12}}>
-                <Button onClick={handleSubmit(handleFormSubmit)} fullWidth variant="contained">
+                <Button onClick={handleSubmit(handleFormSubmit)} 
+                disabled={isPendingCreate||isPendingUpdate}
+                fullWidth variant="contained">
                 {title}
                 </Button>
             </Grid>

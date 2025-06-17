@@ -532,7 +532,7 @@ const FormProductTransaction: React.FC<Props> = ({ transaction }) => {
 
           <Grid size={{xs:12}}>
             <Button 
-            disabled={isPendingCreate||isPendingUpdate}
+              disabled={isPendingCreate||isPendingUpdate}
               variant="contained" 
               style={{cursor:isPendingCreate||isPendingUpdate ? 'not-allowed': 'pointer'}}
               size="large" 

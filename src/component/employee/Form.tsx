@@ -22,13 +22,17 @@ import { useToastStore } from '../../store/toastStore';
 import { EmployeeForm,Employee, EmployeeFormSubmit } from '@type/model/Employee';
 import {DatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useCreateEmployee, useUpdateEmployee } from '@query/useEmployee';
-import { formatNumber, generateId, uploadImageToCloudinary } from '@utils/format';
+import { formatNumber, generateId, getVietnamTime, uploadImageToCloudinary } from '@utils/format';
 import { RequiredLable } from '../Icon';
 import { styled } from '@mui/system';
 import { SHIFT_LABELS } from '@form/shifth';
 import { useNavigate,Link } from 'react-router-dom';
+dayjs.extend(utc);
+dayjs.extend(timezone);
 export const CustomTextarea = styled(TextareaAutosize)(
   ({ theme }) => ({
     width: '100%',
@@ -340,8 +344,8 @@ const Form: React.FC<Props> = ({ employee }) => {
                     onChange={(date) => {
                       setValue('dateOfBirth', dayjs(date).format('YYYY-MM-DD'))
                     }}
-                    maxDate={dayjs().add(-16, 'y')}
-                    minDate={dayjs().add(-60, 'y')}
+                    maxDate={getVietnamTime().add(-16, 'y')}
+                    minDate={getVietnamTime().add(-60, 'y')}
                     label={
                       <span>
                         Ngày sinh<RequiredLable required />

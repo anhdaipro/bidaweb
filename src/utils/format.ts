@@ -1,3 +1,8 @@
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+dayjs.extend(utc);
+dayjs.extend(timezone);
 export const formatNumber = (value: number) => {
     return new Intl.NumberFormat('en-US').format(value);
 };
@@ -44,3 +49,4 @@ export const uploadImageToCloudinary = async (file: File, folder:string): Promis
   const data = await response.json();
   return data; // link ảnh
 }
+export const getVietnamTime = () => dayjs().utc().tz("Asia/Ho_Chi_Minh");

@@ -49,7 +49,7 @@ const FormSchedule:React.FC<Props> = ({schedule}) => {
     const [inputValue, setInputValue] = useState('');
     const [item,setItem] = useState<Employee|null>(null);
     const addToast = useToastStore(state => state.addToast);
-    const {mutate: addSchedule } = useCreateSchedules();
+    const {mutate: addSchedule,isPending } = useCreateSchedules();
     const theme = useTheme();
     const shifts = useScheduleStore((state) => state.shifts);
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -211,6 +211,7 @@ const FormSchedule:React.FC<Props> = ({schedule}) => {
         </TableContainer>
         {checkdate && 
         <Button
+            disabled={isPending}
             variant="contained"
             color="primary"
             onClick={handleSubmit(handleUpdateSchedule)}

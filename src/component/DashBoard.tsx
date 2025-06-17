@@ -19,6 +19,7 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  CircularProgress,
 } from '@mui/material';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import TableChartIcon from '@mui/icons-material/TableChart';
@@ -56,6 +57,7 @@ export default function Dashboard() {
           gap: 2,
         }}
       >
+        <CircularProgress color="primary" />
         <Typography variant="h6" color="primary">
           Đang tải dữ liệu...
         </Typography>

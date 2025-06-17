@@ -6,19 +6,23 @@ import {useFinishTableSession, useStartTableSession } from '@query/useTableSessi
 import { TableSession } from '@type/model/TableSession';
 import { Table } from '@type/model/Table';
 import { Box, Button, Stack, Typography } from '@mui/material';
-import { generateId } from '@utils/format';
-
+import { generateId, getVietnamTime } from '@utils/format';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+dayjs.extend(utc);
+dayjs.extend(timezone);
 interface InfoTab{
   selectedSession?: TableSession;
   tableSessions:TableSession[];
   selectedTable:Table;
 }
 const InfoTab:React.FC<InfoTab> = ({selectedSession, tableSessions,selectedTable}) => {
-  const startTime = useTableStore((s) => s.startTime);
   const tables = useTableStore(state=>state.tables)
-  const now = new Date();
-  const start = selectedSession ? new Date(selectedSession.startTime) : new Date();
-  const diffMs = now.getTime() - start.getTime();
+  const now = dayjs().utc().tz("Asia/Ho_Chi_Minh");
+  console.log(now.format())
+  const start = selectedSession ? dayjs(selectedSession.startTime) : now;
+  const diffMs = now.valueOf() - start.valueOf();
   const playedMinutes = Math.floor(diffMs / 60000); // = số phút thực tế đã chơi
   const hours = Math.floor(playedMinutes / 60);
   const mins = playedMinutes - hours*60;
@@ -125,16 +129,7 @@ const InfoTab:React.FC<InfoTab> = ({selectedSession, tableSessions,selectedTable
       <>
         <Box mb={1}>
           <Typography variant="body2" mb={1}>
-            Bắt đầu lúc:{' '}
-            {startTime
-              ? new Date(startTime).toLocaleString('vi-VN', {
-                  day: '2-digit',
-                  month: '2-digit',
-                  year: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })
-              : '---'}
+            Bắt đầu lúc:{start ? dayjs(start).format('DD/MM/YYYY HH:mm') : ''}
           </Typography>
           <Typography variant="body2">Đã chơi: {elapsedTime}</Typography>
         </Box>

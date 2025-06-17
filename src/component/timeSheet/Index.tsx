@@ -45,18 +45,20 @@ const Index = () => {
     if (isLoading || !user || isLoadingShift) {
         return (
         <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  mt: 4,
-                }}
-              >
-                <CircularProgress color="primary" />
-                <Typography variant="body1" sx={{ mt: 2 }}>
-                  Đang tải dữ liệu...
-                </Typography>
-              </Box>
+                  sx={{
+                    height: '100vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: 2,
+                  }}
+                >
+                  <CircularProgress color="primary" />
+                  <Typography variant="h6" color="primary">
+                    Đang tải dữ liệu...
+                  </Typography>
+                </Box>
         );
     }
     const aTimeSheet = data.data;
