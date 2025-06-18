@@ -1,3 +1,4 @@
+import { apiLogout } from '@api/apiUser';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 export const baseURL = 'https://bidanode.onrender.com/api'
@@ -38,6 +39,7 @@ axiosInstance.interceptors.request.use(
         }
       } else {
         // Nếu refresh token cũng hết hạn → đăng xuất
+        await apiLogout()
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
         window.location.href = '/login';
