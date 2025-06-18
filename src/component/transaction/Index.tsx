@@ -114,7 +114,7 @@ const Index: React.FC = () => {
       <Search setFormSearch={setFormSearch} form={formData} />
 
       {user?.roleId === ROLE_ADMIN && (
-        <Box display="flex" justifyContent="space-between" alignItems={'center'} mb={2}>
+        <Box display="flex" justifyContent="space-between" alignItems={'center'} my={2}>
             <Typography variant="h2"  fontSize={20} >Giao dịch sản phẩm</Typography>
             <Button to='/transaction/create' component={Link} variant="contained">Tạo mới</Button>
         </Box>

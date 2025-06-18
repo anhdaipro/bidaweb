@@ -176,14 +176,14 @@ const FormTableSession: React.FC<Props> = ({ tableSession }) => {
       <Box sx={{ maxWidth: 800, mx: 'auto', p: { xs: 2, sm: 3 }, bgcolor: 'background.paper', borderRadius: 2 }}>
         {/* Back Link */}
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
-          <Button component={Link} to="/tableSession" variant="outlined" color="primary">
-            Danh sách giao dịch
+          <Button component={Link} to="/session" variant="outlined" color="primary">
+            Danh sách phiên chơi
           </Button>
         </Box>
 
         {/* Title */}
         <Typography variant="h5" align="center" sx={{ mb: 3, fontWeight: 'bold' }}>
-          {title} giao dịch sản phẩm
+          {title} phiên chơi
         </Typography>
 
         {/* Form */}
